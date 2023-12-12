@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <style>
+        * {
+            font-size: 25px;
+            text-decoration: none;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: rgb(196, 196, 196);
+        }
+
+        .main {
+            display: block;
+        }
+
+        .content {
+            width: 70%;
+            height: auto;
+            margin: 0 auto;
+            background-color: rgb(104, 104, 104);
+        }
+
+        header {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .user_info {
+            align-items: center;
+            width: 15%;
+            text-align: center;
+        }
+
+        .user_info div {
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.4s;
+        }
+
+        .user_info div:hover {
+            background-color: rgb(150, 150, 150);
+        }
+
+        header .main_home {
+            width: 10%;
+            text-align: center;
+            transition: 0.4s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header a:hover {
+            background-color: rgb(150, 150, 150);
+        }
+
+        .main_cont {
+            height: auto;
+            display: block;
+            margin-top: 100px;
+        }
+
+        .main_cont form {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .list {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 100px;
+        }
+
+        .main_cont input {
+            border: 0;
+            background-color: rgb(90, 90, 90);
+        }
+
+        .subm_btn {
+            margin-right: 200px;
+            width: 150px;
+            height: 40px;
+        }
+
+        .input1 {
+            width: 50%;
+        }
+
+        .input2 {
+            width: 45%;
+            height: 100px;
+            font-size: 20px;
+            background-color: rgb(90, 90, 90);
+            border: 0;
+        }
+
+        .status_list {
+            gap: 200px;
+        }
+
+        .done_marker div {
+            width: 150px;
+            height: 40px;
+            background-color: rgb(214, 214, 214);
+            color: rgb(78, 78, 78);
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            font-size: 30px;
+            border-radius: 10px;
+            transition: 0.4s;
+        }
+
+        .done_marker div:hover {
+            background-color: rgb(189, 188, 188);
+            ;
+        }
+
+        .cancler div {
+            width: 150px;
+            height: 40px;
+            background-color: rgb(90, 90, 90);
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            transition: 0.4s;
+        }
+
+        .bot_btns {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            gap: 400px;
+            margin-left: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="content">
+            <header>
+                <a class="main_home" href="{{url_for('home')}}">
+                    <div class="home">
+                        <h2>Home</h2>
+                    </div>
+                </a>
+                <div class="user_info">
+                    <h2>Hi, {{name}}</h2>
+                    <a href="{{url_for('logout')}}">
+                        <div>Logout</div>
+                    </a>
+                </div>
+            </header>
+            <hr style="margin-top: 50px;">
+            <div class="main_cont">
+                <form action="/edit" method="post">
+                    <input type="hidden" value="{{task[0]}}" name="id">
+                    <div class="list">
+                        <h2>Title:</h2>
+                        <input class="input1" type="text" name="title" value="{{task[2]}}">
+                    </div>
+                    <div class="list">
+                        <h2>Description:</h2>
+                        <textarea class="input2" name="description">{{task[3]}}</textarea>
+                    </div>
+                    <div class="list status_list">
+                        <h2>Status:</h2>
+                        {% if task[4] == 0 %}
+                        <h2 style="background-color: rgb(182, 182, 90); width: 100px; height: 40px; border-radius: 20px; display: flex; justify-content: center; align-items: center;">Active</h2>
+                        <a class="done_marker" href="{{url_for('done_undone', id = task[0])}}">
+                            <div>Done</div>
+                        </a>
+                        {% else %}
+                        <h2 style="background-color: rgb(93, 182, 90); width: 150px; height: 40px; border-radius: 20px; display: flex; justify-content: center; align-items: center;">Completed</h2>
+                        <a class="done_marker" href="{{url_for('done_undone', id = task[0])}}">
+                            <div>Undone</div>
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="list">
+                        <h2>Deadline:</h2>
+                        <input value="{{datetime[0]}}" class="input3" type="date" name="deadline1">
+                        <input value="{{datetime[1]}}" class="input4" type="time" name="deadline2">
+                    </div>
+                    <div class="bot_btns">
+                        <a class="cancler" href="{{url_for('home')}}">
+                            <div>Back</div>
+                        </a>
+                        <input type="submit" class="subm_btn" value="Edit">
+                    </div>
+                </form>
+            </div>
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+</body>
+
+</html>
