@@ -2,11 +2,11 @@
 
 ## How to start project.
 
-Download all files to one directory.
-Open that directory on cmd.
-Download "flask" library using "pip install flask"
-Write in cmd "flask run"
-Follow the given link
+1. Download all files to one directory.
+2. Open that directory on cmd.
+3. Download "flask" library using "pip install flask"
+4. Write in cmd "flask run"
+5. Follow the given link
 
 
 ## Website guide
